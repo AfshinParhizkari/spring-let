@@ -39,23 +39,23 @@ public class Billcontroller extends BaseController {
         }
     }
 
-    @RequestMapping("/billreg")
-    public String home() {
+    @RequestMapping("/billsave")
+    public String save() {
         try {
-            billdao.save();
-            billdao.saveUser("5900004120", "09191942264", "10001", "123456789", UserRole.ADMIN.text());
-            billdao.saveUser("0010498842", "09127034625", "10002", "123456789", UserRole.COMMON.text());
+            BillModel bill;
+
+            billdao.UpdateInfo(bill);
             return "index";
         }
+
         catch (Exception e){
             e.printStackTrace();
             return "error";
         }
     }
-
-   
-    @RequestMapping("/underConstruction")
-    public String underConstruction() {
+  
+    @RequestMapping("/getbill")
+    public String get() {
         try {
             return "underConstruction";
         }
