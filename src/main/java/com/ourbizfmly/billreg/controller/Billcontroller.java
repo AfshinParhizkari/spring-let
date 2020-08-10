@@ -14,12 +14,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Controller
 @Transactional
 @EnableWebMvc
-public class AppController extends BaseController {
+public class Billcontroller extends BaseController {
     @Autowired
-    private UserRoleDAOImpl userRoleDAOImpl;
-
-    @Autowired
-    private UserAdminDAO userAdminDAO;
+    private Billdao billdao;
 
     @InitBinder
     public void myInitBinder(WebDataBinder dataBinder) {
@@ -42,12 +39,12 @@ public class AppController extends BaseController {
         }
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/billreg")
     public String home() {
         try {
-            userRoleDAOImpl.save();
-            userAdminDAO.saveUser("5900004120", "09191942264", "10001", "123456789", UserRole.ADMIN.text());
-            userAdminDAO.saveUser("0010498842", "09127034625", "10002", "123456789", UserRole.COMMON.text());
+            billdao.save();
+            billdao.saveUser("5900004120", "09191942264", "10001", "123456789", UserRole.ADMIN.text());
+            billdao.saveUser("0010498842", "09127034625", "10002", "123456789", UserRole.COMMON.text());
             return "index";
         }
         catch (Exception e){
@@ -56,19 +53,7 @@ public class AppController extends BaseController {
         }
     }
 
-    @RequestMapping("/login")
-    public String login() {
-        try {
-            return "login";
-        }
-
-        catch (Exception e){
-            e.printStackTrace();
-            return "error";
-        }
-
-    }
-
+   
     @RequestMapping("/underConstruction")
     public String underConstruction() {
         try {
