@@ -1,4 +1,7 @@
-com.ourbizfmly.billreg.billregistration.controller;
+package com.ourbizfmly.billreg.entity;
+
+import com.ourbizfmly.billreg.controller.Billcontroller;
+import com.ourbizfmly.billreg.dao.Billdao;
 
 import javax.persistence.*;
 import java.io.Serializable;

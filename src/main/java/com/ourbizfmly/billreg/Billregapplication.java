@@ -1,13 +1,13 @@
-package com.ourbizfmly.billreg.billregistration;
+package com.ourbizfmly.billreg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BillregistrationApplication {
+public class Billregapplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BillregistrationApplication.class, args);
+		SpringApplication.run(Billregapplication.class, args);
 	}
 
 }

@@ -1,8 +1,9 @@
-package com.ourbizfmly.billreg.billregistration.controller;
+package com.ourbizfmly.billreg.controller;
 
-import com.ourFamilyBusiness.bill.dao.UserAdminDAO;
-import com.ourFamilyBusiness.bill.utils.UserRole;
-import com.ourFamilyBusiness.bill.dao.impl.UserRoleDAOImpl;
+import com.ourbizfmly.billreg.dao.Billdao;
+import com.ourbizfmly.billreg.entity.BillModel;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +15,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Controller
 @Transactional
 @EnableWebMvc
-public class Billcontroller extends BaseController {
+public class Billcontroller  {
     @Autowired
     private Billdao billdao;
+
+    @Autowired
+    private BillModel billmodel;
 
     @InitBinder
     public void myInitBinder(WebDataBinder dataBinder) {
@@ -27,30 +31,18 @@ public class Billcontroller extends BaseController {
         System.out.println("Target=" + target);
     }
 
-    @RequestMapping("/403")
-    public String accessDenied() {
-        try {
-            return "/403";
-        }
-
-        catch (Exception e){
-            e.printStackTrace();
-            return "error";
-        }
-    }
-
     @RequestMapping("/billsave")
-    public String save() {
+    public String UpdateInfo() {
         try {
-            BillModel bill;
+            //BillModel bill;
 
-            billdao.UpdateInfo(bill);
+            billdao.UpdateInfo(billmodel);
             return "index";
         }
 
         catch (Exception e){
             e.printStackTrace();
-            return "error";
+            return "erro";
         }
     }
   
