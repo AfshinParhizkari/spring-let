@@ -13,33 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
-@Transactional
 @EnableWebMvc
 public class Billcontroller  {
+
+    private BillModel bill;
     @Autowired
     private Billdao billdao;
-
-    @Autowired
-    private BillModel billmodel;
-
-    @InitBinder
-    public void myInitBinder(WebDataBinder dataBinder) {
-        Object target = dataBinder.getTarget();
-        if (target == null) {
-            return;
-        }
-        System.out.println("Target=" + target);
-    }
 
     @RequestMapping("/billsave")
     public String UpdateInfo() {
         try {
             //BillModel bill;
-
-            billdao.UpdateInfo(billmodel);
+            billdao.UpdateInfo(bill);
             return "index";
         }
-
         catch (Exception e){
             e.printStackTrace();
             return "erro";
@@ -51,7 +38,6 @@ public class Billcontroller  {
         try {
             return "underConstruction";
         }
-
         catch (Exception e){
             e.printStackTrace();
             return "error";

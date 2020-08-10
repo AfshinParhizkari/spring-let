@@ -6,22 +6,26 @@ import com.ourbizfmly.billreg.controller.Billcontroller;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.EntityManager;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.hibernate.query.Query;
 
-
-@Entity
+@Repository
 @Table(name = "tb_bill_registeration", uniqueConstraints = {@UniqueConstraint(columnNames = {"billregisteration_id"}),@UniqueConstraint(columnNames = {"billing_id"})})
 public class Billdao implements Serializable {
    private static final long serialVersionUID = -5794059306446703568L;
     
-   @Autowired
+   //@Autowired
     private SessionFactory sessionFactory;
 
 //@Override
