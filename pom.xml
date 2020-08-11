@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ourbizfmly</groupId>
 	<artifactId>billreg</artifactId>
-	<version>1</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>billreg</name>
 	<description>i want to create a simple spring prj with jsp</description>
@@ -59,7 +59,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.10.Final</version>
 		  </dependency>
-
 
 	</dependencies>
 
