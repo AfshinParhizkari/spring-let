@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ourbizfmly</groupId>
 	<artifactId>billreg</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<packaging>war</packaging>
 	<name>billreg</name>
 	<description>i want to create a simple spring prj with jsp</description>

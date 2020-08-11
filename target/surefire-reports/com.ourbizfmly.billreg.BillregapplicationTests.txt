@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.ourbizfmly.billreg.BillregapplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.95 s - in com.ourbizfmly.billreg.BillregapplicationTests
