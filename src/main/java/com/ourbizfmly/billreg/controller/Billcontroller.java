@@ -1,47 +1,40 @@
 package com.ourbizfmly.billreg.controller;
 
-import com.ourbizfmly.billreg.dao.Billdao;
-import com.ourbizfmly.billreg.entity.BillModel;
-
-
+import com.ourbizfmly.billreg.dao.Billrep;
+import com.ourbizfmly.billreg.entity.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@Controller
-@EnableWebMvc
+@RestController
 public class Billcontroller  {
 
-    private BillModel bill;
-    @Autowired
-    private Billdao billdao;
+    @Autowired private Billrep dao;
 
-    @RequestMapping("/billsave")
-    public String UpdateInfo() {
+    @PostMapping("/billsave")
+    public String UpdateInfo(Bill bill) {
         try {
-            //BillModel bill;
-            billdao.UpdateInfo(bill);
-            return "index";
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return "erro";
-        }
-    }
-  
-    @RequestMapping("/getbill")
-    public String get() {
-        try {
-            return "underConstruction";
+            bill=dao.save(bill);
+            return bill.getBillregisteration_id();
         }
         catch (Exception e){
             e.printStackTrace();
             return "error";
         }
-
+    }
+  
+    @GetMapping("/getbill")
+    public String get(String billregisteration_id) {
+        try {
+            return dao.findById(billregisteration_id).stream().findFirst().orElse(null).toString();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
     }
 }

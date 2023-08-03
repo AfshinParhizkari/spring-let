@@ -1,0 +1,6 @@
+1. generate encode password:
+        mvn jasypt:encrypt-value "-Djasypt.encryptor.password=jasypt-password" "-Djasypt.plugin.value=my-app-pass"
+   result: ENC(5xZ8VUB9t2jWW8QZb7AvPwrMNMtCmihxRtm44mDlC8GimDSIe7G7jYzUaxf6jfUU)
+2. set environment in IDE or os:
+        jasypt.encryptor.password=jasypt-password
+3. add anotation: @EnableEncryptableProperties

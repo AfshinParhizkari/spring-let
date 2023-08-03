@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.2.RELEASE</version>
+		<version>2.5.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ourbizfmly</groupId>
@@ -13,10 +13,10 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>billreg</name>
-	<description>i want to create a simple spring prj with jsp</description>
+	<description>simple spring prj</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -38,6 +38,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.10.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -55,19 +61,30 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.10.Final</version>
-		  </dependency>
-
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>3.0.3</version>
+		</dependency>
 	</dependencies>
-
+	<!--<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://afshin:8081/repository/mvn-group/</url>
+		</snapshotRepository>
+	</distributionManagement>-->
 	<build>
+		<!-- jasptpt plugin for encrypt application properties password -->
 		<plugins>
+			<plugin>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-maven-plugin</artifactId>
+				<version>3.0.3</version>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
 	</build>
 
