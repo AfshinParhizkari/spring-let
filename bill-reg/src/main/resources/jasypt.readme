@@ -1,0 +1,5 @@
+1. get encrypted password via:
+    mvn jasypt:encrypt-value "-Djasypt.encryptor.password=myP@s" "-Djasypt.plugin.value=123456"
+2. add following environment in os or intellij:
+    jasypt.encryptor.password=myP@s
+3. add annotation: @EnableEncryptableProperties
