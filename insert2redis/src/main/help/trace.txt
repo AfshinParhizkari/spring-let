@@ -1,0 +1,3 @@
+trace packet in docker engine:
+docker run --net=host corfr/tcpdump
+docker run --net=elk_default corfr/tcpdump port 5044 -v

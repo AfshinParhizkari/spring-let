@@ -22,7 +22,7 @@ public class CashSrv {
     }
 
     public int addToCache(String email) {
-        logger.info("Generating otp for {} ", email);
+        logger.info("INTL: "+"Generating otp for {} ", email);
         int value = otpGenerator.generateOtp();
         cacheRepository.put(email, value);
         return value;
@@ -32,13 +32,13 @@ public class CashSrv {
         try {
             Optional<String> s = cacheRepository.get(otpValidateRequest.getKey());
             if (s.isPresent() && s.get().equals(otpValidateRequest.getOtp())) {
-                logger.info("Found the key in cache {} ", otpValidateRequest.getOtp());
+                logger.info("INTL: "+"Found the key in cache {} ", otpValidateRequest.getOtp());
                 cacheRepository.remove(otpValidateRequest.getKey());
                 return "Key Removed from cache key: " + otpValidateRequest.getKey();
             }
             return "Invalid Otp";
         }catch (Exception ex){
-            logger.error(ex.getMessage());
+            logger.error("INTL: "+ex.getMessage());
             return "Invalid Otp";
             }
         }

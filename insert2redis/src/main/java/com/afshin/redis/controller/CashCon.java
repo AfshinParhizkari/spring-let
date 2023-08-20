@@ -21,12 +21,12 @@ public class CashCon {
     @PostMapping("/generate")
     public ResponseEntity<String> addToCache(@RequestBody OtpRequest key) {
         try {
-            logger.info("Generating otp for {} ", key.getEmail());
+            logger.info("INTL: "+ "Generating otp for {} " + key.getEmail());
             int value = cashSrv.addToCache(key.getEmail());
-            logger.info("otp for {} ", key.getEmail(), "is", value);
+            logger.info("INTL: "+"otp for {} "+ key.getEmail() + " is: ", value);
             return ResponseEntity.ok("Otp Generated Successfully Otp : " + value);
         } catch (Exception ex) {
-            logger.error(ex.getMessage());
+            logger.error("INTL: "+ex.getMessage());
             return ResponseEntity.badRequest().body("err");
         }
     }
