@@ -1,4 +1,4 @@
-package com.rkdevblog.redis.configuration;
+package com.afshin.redis.configuration;
 
 import io.lettuce.core.ClientOptions;
 import org.springframework.beans.factory.annotation.Value;

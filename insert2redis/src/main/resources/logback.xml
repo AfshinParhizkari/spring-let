@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+    <springProperty scope="context" name="insert2redis" source="spring.application.name"/>
+    <property name="LOG_PATH" value="/var/log/afshin"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="logPattern" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint}
+                %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint}
+                %clr([%15.15t]){faint}
+                %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+<!--___________________________ APPENDER__________________________________-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                ${logPattern}
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/insert2redis/insert2redis.log</file>
+        <encoder>
+            <pattern>
+                ${logPattern}
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/insert2redis/insert2redis_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+<!--___________________________ LOGSTASH__________________________________-->
+    <appender name="tcp-logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <destination>afshin:9600</destination>
+        <destination>afshin:5044</destination>
+        <!--<ringBufferSize>32000</ringBufferSize>-->
+        <!--<writeBufferSize>16384</writeBufferSize>-->
+        <!--<ssl/>-->
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+            <providers>
+                <!--<mdc />--> <!--MDC variables on the Thread will be written as JSON fields-->
+                <!--<context /> --><!--Outputs entries from logback's context-->
+                <!--<version />--> <!--Logstash json format version, the @version field in the output-->
+                <!--<logLevel />-->
+                <!--<loggerName />-->
+                <pattern>{"serviceName": "redis-template"}</pattern>
+                <!--<threadName />-->
+                <!--<message />-->
+                <!--<logstashMarkers />-->
+                <!--<stackTrace />-->
+            </providers>
+        </encoder>
+    </appender>
+
+    <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
+    <root level="info">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="tcp-logstash" />
+    </root>
+
+    <logger name="com.afshin.redis" additivity="false" level="debug">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="tcp-logstash" />
+    </logger>
+</configuration>

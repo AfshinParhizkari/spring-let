@@ -1,6 +1,6 @@
-package com.rkdevblog.redis.util;
+package com.afshin.redis.util;
 
-import com.rkdevblog.redis.exception.OTPServiceException;
+import com.afshin.redis.exception.OTPServiceException;
 import org.springframework.stereotype.Component;
 
 import java.security.NoSuchAlgorithmException;

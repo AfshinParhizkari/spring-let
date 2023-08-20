@@ -1,11 +1,11 @@
-package com.rkdevblog.redis.repository;
+package com.afshin.redis.repository;
 
 import java.util.Optional;
 
 /**
  * CacheRepository
  */
-public interface CacheRepository {
+public interface CacheRep {
 
     /**
      * Store the key value pair in cache

@@ -1,6 +1,6 @@
-package com.rkdevblog.redis.repository;
+package com.afshin.redis.repository;
 
-import com.rkdevblog.redis.exception.OTPServiceException;
+import com.afshin.redis.exception.OTPServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * Implementation of {@link )
  */
 @Repository
-public class OTPCacheRepository implements CacheRepository {
+public class OTPCacheRepository implements CacheRep {
 
     private long ttl;
     private StringRedisTemplate redisTemplate;

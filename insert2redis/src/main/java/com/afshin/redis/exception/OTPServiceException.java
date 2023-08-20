@@ -1,4 +1,4 @@
-package com.rkdevblog.redis.exception;
+package com.afshin.redis.exception;
 
 /**
  * OtpCache Exception

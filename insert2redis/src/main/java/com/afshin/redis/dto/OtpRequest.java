@@ -1,11 +1,11 @@
-package com.rkdevblog.redis.dto;
+package com.afshin.redis.dto;
 
+import lombok.Data;
 import lombok.Getter;
 
 import java.io.Serializable;
 
-@Getter
+@Data
 public class OtpRequest implements Serializable {
-
     private String email;
 }
