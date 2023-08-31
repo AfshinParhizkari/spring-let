@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/otp")
 public class CashCon {
-    @Autowired
-    CashSrv cashSrv;
+    @Autowired CashSrv cashSrv;
     public static final Logger logger = LoggerFactory.getLogger(CashCon.class);
 
     @PostMapping("/generate")
     public ResponseEntity<String> addToCache(@RequestBody OtpRequest key) {
+        logger.info(key.toString());
         try {
             logger.info("INTL: "+ "Generating otp for {} " + key.getEmail());
             int value = cashSrv.addToCache(key.getEmail());

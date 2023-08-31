@@ -8,42 +8,57 @@
                 %clr([%15.15t]){faint}
                 %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 <!--___________________________ APPENDER__________________________________-->
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
                 ${logPattern}
             </pattern>
         </encoder>
     </appender>
-    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--___________________________ FILE__________________________________-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/insert2redis/insert2redis.log</file>
         <encoder>
+            <charset>UTF-8</charset>
             <pattern>
                 ${logPattern}
             </pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/insert2redis/insert2redis_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/insert2redis/archived/insert2redis_%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 1MB -->
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 10 days' worth of history -->
             <maxHistory>10</maxHistory>
-            <totalSizeCap>100MB</totalSizeCap>
+            <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
     </appender>
 <!--___________________________ LOGSTASH__________________________________-->
-    <appender name="tcp-logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
         <param name="Encoding" value="UTF-8"/>
-        <destination>afshin:9600</destination>
-        <destination>afshin:5044</destination>
+        <destination>afshin:6000</destination>
+        <!--<destination>afshin:5044</destination>-->
         <!--<ringBufferSize>32000</ringBufferSize>-->
         <!--<writeBufferSize>16384</writeBufferSize>-->
         <!--<ssl/>-->
-        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+        <!--<param name="service-name" value="insert2redis"/>-->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <!--<mdc />--> <!--MDC variables on the Thread will be written as JSON fields-->
-                <!--<context /> --><!--Outputs entries from logback's context-->
+                <!--<context />--> <!--Outputs entries from logback's context-->
                 <!--<version />--> <!--Logstash json format version, the @version field in the output-->
                 <!--<logLevel />-->
-                <!--<loggerName />-->
-                <pattern>{"serviceName": "redis-template"}</pattern>
+                <loggerName />
+                <pattern>
+                    <pattern>
+                        {
+                            "service-name": "insert2redis"
+                        }
+                    </pattern>
+                </pattern>
                 <!--<threadName />-->
                 <!--<message />-->
                 <!--<logstashMarkers />-->
@@ -54,14 +69,8 @@
 
     <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
     <root level="info">
-        <appender-ref ref="Console"/>
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="tcp-logstash" />
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+        <appender-ref ref="logstash" />
     </root>
-
-    <logger name="com.afshin.redis" additivity="false" level="debug">
-        <appender-ref ref="Console"/>
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="tcp-logstash" />
-    </logger>
 </configuration>

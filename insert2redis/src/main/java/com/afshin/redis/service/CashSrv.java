@@ -29,6 +29,7 @@ public class CashSrv {
     }
 
     public String removeFromCache(OtpValidateRequest otpValidateRequest) {
+        logger.info(otpValidateRequest.toString());
         try {
             Optional<String> s = cacheRepository.get(otpValidateRequest.getKey());
             if (s.isPresent() && s.get().equals(otpValidateRequest.getOtp())) {
