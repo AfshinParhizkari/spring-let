@@ -47,10 +47,10 @@
             </exclusions>
         </dependency>
         <!-- _________ Spring boot log (Logback is embedded in) + aop + Logstash  _____________ -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
