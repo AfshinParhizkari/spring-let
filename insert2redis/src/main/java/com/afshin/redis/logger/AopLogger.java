@@ -36,7 +36,7 @@ public class AopLogger {
     @AfterThrowing(value = "execution(* com.afshin.redis..service..*(..)) ", throwing = "e")
     public void logServiceError(JoinPoint joinPoint, Throwable e) {
         logger.logStackTrace(e);
-        logger.eventLogger.error("AOP-BF-SRV: "+joinPoint.getSignature().getName() + " error:" + e.getMessage());
+        logger.eventLogger.error("AOP-EX-SRV: "+joinPoint.getSignature().getName() + " error:" + e.getMessage());
     }
 
     @AfterReturning(value = "execution(* com.afshin.redis..service..*(..)) ", returning = "returnValue")
