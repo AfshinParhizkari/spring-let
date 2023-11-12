@@ -36,9 +36,41 @@
             <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
     </appender>
-<!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
+<!--___________________________ LOGSTASH__________________________________-->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <destination>afshin:6000</destination>
+        <!--<destination>afshin:5044</destination>-->
+        <!--<ringBufferSize>32000</ringBufferSize>-->
+        <!--<writeBufferSize>16384</writeBufferSize>-->
+        <!--<ssl/>-->
+        <!--<param name="service-name" value="insert2redis"/>-->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <!--<mdc />--> <!--MDC variables on the Thread will be written as JSON fields-->
+                <!--<context />--> <!--Outputs entries from logback's context-->
+                <version /> <!--Logstash json format version, the @version field in the output-->
+                <logLevel />
+                <loggerName />
+                <pattern>
+                    <pattern>
+                        {
+                            "service-name": "insert2redis"
+                        }
+                    </pattern>
+                </pattern>
+                <threadName />
+                <message />
+                <!--<logstashMarkers />-->
+                <stackTrace />
+            </providers>
+        </encoder>
+    </appender>
+
+    <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
     <root level="info">
         <appender-ref ref="console"/>
         <appender-ref ref="file"/>
+        <appender-ref ref="logstash" />
     </root>
 </configuration>
