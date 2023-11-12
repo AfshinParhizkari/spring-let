@@ -105,7 +105,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>afshin:5000/${project.artifactId}</repository>
+                    <repository>localhost:5000/${project.artifactId}</repository>
                     <tag>test</tag>
                     <buildArgs><JAR_FILE>${project.build.finalName}.jar</JAR_FILE></buildArgs>
                 </configuration>

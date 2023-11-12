@@ -1,4 +1,4 @@
-FROM afshin:5000/openjdk:11
+FROM localhost:5000/openjdk:11
 MAINTAINER "Afshin.Parhizkari@gmail.com"
 VOLUME /insert2redis
 ARG JAR_FILE=target/insert2redis-1.jar
