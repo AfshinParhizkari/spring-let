@@ -1,0 +1,7 @@
+1. add jasypt plugin to pom.xml : jasypt-maven-plugin
+2. get encrypt:
+    mvn jasypt:encrypt-value "-Djasypt.encryptor.password=jasyptpassword" "-Djasypt.plugin.value=yourpassword"
+3. add environment in os or intellij:
+    jasypt.encryptor.password=yourpassword
+4. add annotation in main class:
+    @EnableEncryptableProperties

@@ -17,6 +17,7 @@
 
     <groupId>com.afshin</groupId>
     <artifactId>pom-springcloud-ilford</artifactId>
+    <!-- Ilford	2.4.x, 2.5.x (Starting with 2020.0.3) -->
     <version>3.0.4</version>
     <packaging>pom</packaging>
     <developers>
@@ -172,6 +173,11 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
             </plugin>
-        </plugins>
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+                <version>3.0.3</version>
+            </plugin>
+    </plugins>
     </build>
 </project>
