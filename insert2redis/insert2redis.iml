@@ -107,4 +107,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.33" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.10" level="project" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="80e2f055-4e4d-4955-9f17-aae3a23046c2" />
+  </component>
 </module>
